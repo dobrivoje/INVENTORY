@@ -26,12 +26,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Lokacija.findAll", query = "SELECT l FROM Lokacija l"),
-    @NamedQuery(name = "Lokacija.findById", query = "SELECT l FROM Lokacija l WHERE l.id = :id"),
-    @NamedQuery(name = "Lokacija.findByIDLokacije", query = "SELECT l FROM Lokacija l WHERE l.iDLokacije = :iDLokacije"),
-    @NamedQuery(name = "Lokacija.findByNaziv", query = "SELECT l FROM Lokacija l WHERE l.naziv = :naziv"),
+    @NamedQuery(name = "Lokacija.allLocations", query = "SELECT l FROM Lokacija l"),
+    @NamedQuery(name = "Lokacija.findByIDLokacije", query = "SELECT l FROM Lokacija l WHERE l.iDLokacije = :IDLokacije"),
+    @NamedQuery(name = "Lokacija.findByNaziv", query = "SELECT l FROM Lokacija l WHERE l.naziv LIKE :Naziv"),
     @NamedQuery(name = "Lokacija.findByTip", query = "SELECT l FROM Lokacija l WHERE l.tip = :tip")})
 public class Lokacija implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -108,15 +108,13 @@ public class Lokacija implements Serializable {
             return false;
         }
         Lokacija other = (Lokacija) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return !((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)));
     }
 
     @Override
     public String toString() {
-        return "org.superb.clients.mol.inventory.inventory.DB.Lokacija[ id=" + id + " ]";
+        return "LOKACIJA [id=" + id + "], "
+                + "[Naziv=" + naziv + "], "
+                + "[Tip=" + tip + "]";
     }
-    
 }

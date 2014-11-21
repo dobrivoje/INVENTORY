@@ -12087,3 +12087,17 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .mojaTabelaRadnici .v-table-row, .mytheme .mojaTabelaRadnici .v-table-row-odd {
+	background: white;
+}
+
+.mytheme .mojaTabelaRadnici .v-table-row:hover, .mytheme .mojaTabelaRadnici .v-table-row-odd:hover {
+	background-color: #fce71e;
+	cursor: pointer;
+}
+
+.mytheme .mojaTabelaRadnici .v-table-cell-content {
+	text-align: center;
+	border-top: 1px solid lightgrey;
+}

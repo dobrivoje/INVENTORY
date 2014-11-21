@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "PopisLokacija.findByOtpis", query = "SELECT p FROM PopisLokacija p WHERE p.otpis = :otpis"),
     @NamedQuery(name = "PopisLokacija.findByDupliran", query = "SELECT p FROM PopisLokacija p WHERE p.dupliran = :dupliran")})
 public class PopisLokacija implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -195,7 +196,7 @@ public class PopisLokacija implements Serializable {
 
     @Override
     public String toString() {
-        return "org.superb.clients.mol.inventory.inventory.DB.PopisLokacija[ id=" + id + " ]";
+        return "[" + barkod + "], [" + datumUpisabarkoda + "], [" + vremeUpisabarkoda + "]";
     }
-    
+
 }

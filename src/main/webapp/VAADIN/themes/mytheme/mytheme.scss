@@ -30,6 +30,22 @@
 @import "../valo/valo.scss";
 
 @mixin mytheme {
-  @include valo;
-  // Insert your own theme rules here
+    @include valo;
+
+    // Insert your own theme rules here
+    .mojaTabelaRadnici .v-table-row,
+    .mojaTabelaRadnici .v-table-row-odd {
+        background: white
+    }
+
+    .mojaTabelaRadnici .v-table-row:hover,
+        .mojaTabelaRadnici .v-table-row-odd:hover {
+        background-color: #fce71e;
+        cursor: pointer;
+    }
+
+    .mojaTabelaRadnici .v-table-cell-content {
+        text-align: center;
+        border-top: 1px solid lightgrey;
+    }
 }

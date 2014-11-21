@@ -26,10 +26,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Radnik.findAll", query = "SELECT r FROM Radnik r"),
-    @NamedQuery(name = "Radnik.findByIdr", query = "SELECT r FROM Radnik r WHERE r.idr = :idr"),
-    @NamedQuery(name = "Radnik.findByIme", query = "SELECT r FROM Radnik r WHERE r.ime = :ime"),
-    @NamedQuery(name = "Radnik.findByPrezime", query = "SELECT r FROM Radnik r WHERE r.prezime = :prezime")})
+    @NamedQuery(name = "Radnik.sviRadnici", query = "SELECT r FROM Radnik r"),
+    @NamedQuery(name = "Radnik.poImenu", query = "SELECT r FROM Radnik r WHERE r.ime LIKE :Ime"),
+    @NamedQuery(name = "Radnik.poPrezimenu", query = "SELECT r FROM Radnik r WHERE r.ime LIKE :Prezime")})
 public class Radnik implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -103,7 +102,9 @@ public class Radnik implements Serializable {
 
     @Override
     public String toString() {
-        return "org.superb.clients.mol.inventory.inventory.DB.Radnik[ idr=" + idr + " ]";
+        return "RADNIK [id=" + idr + "], "
+                + "[Ime=" + ime + "], "
+                + "[Prezime=" + prezime + "]";
     }
 
 }
