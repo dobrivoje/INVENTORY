@@ -5,7 +5,7 @@
 	<groupId>org.superb.clients.mol.inventory</groupId>
 	<artifactId>INVENTORY</artifactId>
 	<packaging>war</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>INVENTORY</name>
 
 	<properties>
