@@ -1,0 +1,28 @@
+@import "../valo/valo.scss";
+
+@mixin svetlaTema {
+    @include valo;
+
+    .mojaTabelaRadnici .v-table-header {
+        text-align: center;
+        font-size: inherit;
+    }
+
+    .mojaTabelaRadnici .v-table-row,
+    .mojaTabelaRadnici .v-table-row-odd {
+        background: white
+    }
+
+    .mojaTabelaRadnici .v-table-row:hover,
+        .mojaTabelaRadnici .v-table-row-odd:hover {
+        background-color: #fbf476;
+        cursor: pointer;
+    }
+
+    .mojaTabelaRadnici .v-table-cell-content {
+        text-align: center;
+        border-top: 1px solid black;
+        font-size: 18px;
+        font-family: Ubuntu, ubuntu, 'Ubuntu', 'ubuntu', sans-serif;
+    }
+}

@@ -1,0 +1,7 @@
+@import "addons.scss";
+@import "svetlatema.scss";
+
+.mytheme {
+    @include addons;
+    @include svetlaTema;
+}
