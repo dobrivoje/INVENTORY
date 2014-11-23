@@ -1,0 +1,1 @@
+$wnd.rs_superb_apps_inventory_clients_mol_AppWidgetSet.runAsyncCallback2('T8(1757,1,ikd);_.vc=function T_b(){hRb((!aRb&&(aRb=new mRb),aRb),this.b.e)};Ped(Vh)(2);\n//# sourceURL=rs.superb.apps.inventory.clients.mol.AppWidgetSet-2.js\n')

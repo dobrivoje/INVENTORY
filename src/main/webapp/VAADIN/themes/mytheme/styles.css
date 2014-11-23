@@ -12079,6 +12079,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .mojaTabelaRadnici .v-table-row:hover, .mytheme .mojaTabelaRadnici .v-table-row-odd:hover {
 	background-color: #fbf476;
+	color: #000;
 	cursor: pointer;
 }
 

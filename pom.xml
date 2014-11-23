@@ -169,6 +169,7 @@
                     <style>OBF</style>
                     <strict>true</strict>
                     <runTarget>http://localhost:8080/INVENTORY</runTarget>
+                    <localWorkers>4</localWorkers>
                 </configuration>
                 <executions>
                     <execution>

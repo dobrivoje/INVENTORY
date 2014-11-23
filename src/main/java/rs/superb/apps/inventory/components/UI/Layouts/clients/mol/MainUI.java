@@ -28,10 +28,13 @@ public class MainUI extends HorizontalSplitPanel {
 
     private static final int MAIN_UI_SPLIT_RATIO_RATIO = 33;
     private static final int TABLE_PAGE_INIT = 7;
+    private static final float WINDOW_WIDTH_PERCENT = 70;
+    private static final float WINDOW_HEIGHT_PERCENT = 66;
+    private static final String TABLE_STYLE = "mojaTabelaRadnici";
 
     private final VerticalLayout mainMenuPanel = new VerticalLayout();
 
-    private final TextField textField_RADNIK = new TextField("Delimično ime: ");
+    private final TextField textField_RADNIK = new TextField("Delimično ime");
     private final Table table_RADNIK = new Table("Radnici");
     private final Button button_RADNIK;
 
@@ -43,8 +46,8 @@ public class MainUI extends HorizontalSplitPanel {
 
         mainMenuPanel.setMargin(true);
         mainMenuPanel.setSpacing(true);
-        setFirstComponent(mainMenuPanel);
-        setSecondComponent(new AccordionMenu());
+        setFirstComponent(new AccordionMenu());
+        setSecondComponent(mainMenuPanel);
 
         this.controller = new InventoryController();
 
@@ -62,7 +65,7 @@ public class MainUI extends HorizontalSplitPanel {
         //</editor-fold>
 
         //<editor-fold defaultstate="collapsed" desc="Table Spisak Artikala">
-        table_RADNIK.setStyleName("mojaTabelaRadnici");
+        table_RADNIK.setStyleName(TABLE_STYLE);
         table_RADNIK.setSizeFull();
         table_RADNIK.setImmediate(false);
         table_RADNIK.setSelectable(true);
@@ -71,7 +74,6 @@ public class MainUI extends HorizontalSplitPanel {
         table_RADNIK.setPageLength(TABLE_PAGE_INIT);
 
         table_RADNIK.addItemClickListener(new ItemClickEvent.ItemClickListener() {
-
             @Override
             public void itemClick(ItemClickEvent event) {
                 if (event.isDoubleClick()) {
@@ -80,8 +82,8 @@ public class MainUI extends HorizontalSplitPanel {
                     Window window = new Window("Spisak svih artikala radnika ".concat(odabraniRadnikIzTabele.getIme()));
                     VerticalLayout winVLayout = new VerticalLayout();
                     window.setModal(true);
-                    window.setWidth(70, Unit.PERCENTAGE);
-                    window.setHeight(50, Unit.PERCENTAGE);
+                    window.setWidth(WINDOW_WIDTH_PERCENT, Unit.PERCENTAGE);
+                    window.setHeight(WINDOW_HEIGHT_PERCENT, Unit.PERCENTAGE);
                     window.setContent(winVLayout);
 
                     for (PopisLokacija pl : odabraniRadnikIzTabele.getPopisLokacijaList()) {
@@ -129,22 +131,13 @@ public class MainUI extends HorizontalSplitPanel {
             @Override
             public void buttonClick(Button.ClickEvent event) {
                 controller.setBeanItemController_InventoryWorker(textField_RADNIK.getValue());
-
                 table_RADNIK.setContainerDataSource(controller.getBeanItemController_InventoryWorker());
                 table_RADNIK.setPageLength(Math.min(TABLE_PAGE_INIT, controller.getBeanItemController_InventoryWorker().size()));
             }
         });
 
-        final TextField textFieldTheme = new TextField("Theme Selector");
-        textFieldTheme.addShortcutListener(new ShortcutListener(null, ShortcutAction.KeyCode.ENTER, null) {
-
-            @Override
-            public void handleAction(Object sender, Object target) {
-            }
-        });
-
         mainMenuPanel.addComponent(textField_RADNIK);
-        mainMenuPanel.addComponent(table_RADNIK);
         mainMenuPanel.addComponent(button_RADNIK);
+        mainMenuPanel.addComponent(table_RADNIK);
     }
 }

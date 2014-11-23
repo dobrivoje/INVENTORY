@@ -12,10 +12,6 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Image;
 
-/**
- *
- * @author root
- */
 public class AccordionMenu extends Accordion {
     
     private final String[] sizes = {"16", "32", "64"};
@@ -24,6 +20,7 @@ public class AccordionMenu extends Accordion {
         "note.png", "ok.png", "trash.png", "user.png"};
     
     public AccordionMenu() {
+        setCaption("INVENTORY Application Manu");
         setSizeFull();
         createTabs(sizes);
     }
@@ -34,6 +31,7 @@ public class AccordionMenu extends Accordion {
                 
                 @Override
                 protected String getCss(Component c) {
+                    // return "display: inline-block;";
                     return "display: inline-block;";
                 }
             };
