@@ -5,6 +5,7 @@
  */
 package rs.superb.apps.inventory.components.UI.Layouts.clients.mol;
 
+import com.vaadin.addon.tableexport.ExcelExport;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
@@ -18,6 +19,7 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 import com.vaadin.ui.themes.Reindeer;
+import java.util.List;
 import rs.superb.apps.inventory.buisness.funcionalities.IInventoryController;
 import rs.superb.apps.inventory.components.UI.clients.mol.AccordionMenu;
 import rs.superb.apps.inventory.controller.clients.mol.InventoryController;
@@ -26,17 +28,21 @@ import rs.superb.apps.inventory.database.entities.clients.mol.Radnik;
 
 public class MainUI extends HorizontalSplitPanel {
 
-    private static final int MAIN_UI_SPLIT_RATIO_RATIO = 33;
+    //<editor-fold defaultstate="collapsed" desc="final defs">
+    private static final int MAIN_UI_SPLIT_RATIO_RATIO = 26;
     private static final int TABLE_PAGE_INIT = 7;
     private static final float WINDOW_WIDTH_PERCENT = 70;
     private static final float WINDOW_HEIGHT_PERCENT = 66;
     private static final String TABLE_STYLE = "mojaTabelaRadnici";
+    //</editor-fold>
 
     private final VerticalLayout mainMenuPanel = new VerticalLayout();
 
-    private final TextField textField_RADNIK = new TextField("Delimično ime");
+    private final TextField textField_RADNIK = new TextField("Ime radnika");
     private final Table table_RADNIK = new Table("Radnici");
     private final Button button_RADNIK;
+
+    private final Button excelExportButton = new Button("Excel export tabele");
 
     private final IInventoryController controller;
 
@@ -73,7 +79,8 @@ public class MainUI extends HorizontalSplitPanel {
         table_RADNIK.setNullSelectionAllowed(false);
         table_RADNIK.setPageLength(TABLE_PAGE_INIT);
 
-        table_RADNIK.addItemClickListener(new ItemClickEvent.ItemClickListener() {
+        //<editor-fold defaultstate="collapsed" desc="Table Items By Worker_ClickListener">
+        ItemClickEvent.ItemClickListener table_RADNIK_ClickListener = new ItemClickEvent.ItemClickListener() {
             @Override
             public void itemClick(ItemClickEvent event) {
                 if (event.isDoubleClick()) {
@@ -86,14 +93,19 @@ public class MainUI extends HorizontalSplitPanel {
                     window.setHeight(WINDOW_HEIGHT_PERCENT, Unit.PERCENTAGE);
                     window.setContent(winVLayout);
 
-                    for (PopisLokacija pl : odabraniRadnikIzTabele.getPopisLokacijaList()) {
-                        winVLayout.addComponent(new Label(pl.toString()));
-                    }
+                    controller.setBeanItemController_InventoryWorker_AllItems(odabraniRadnikIzTabele);
+                    Table tableWorkerINV = new Table("Sve stavke radnika", controller.getBeanItemController_InventoryWorker_ItemsByUser());
+                    tableWorkerINV.setStyleName(TABLE_STYLE);
+                    tableWorkerINV.setSizeFull();
 
+                    winVLayout.addComponent(tableWorkerINV);
                     UI.getCurrent().addWindow(window);
                 }
             }
-        });
+        };
+        //</editor-fold>
+
+        table_RADNIK.addItemClickListener(table_RADNIK_ClickListener);
 
         table_RADNIK.addGeneratedColumn("Spisak Popisa Osobe", new Table.ColumnGenerator() {
 
@@ -114,7 +126,9 @@ public class MainUI extends HorizontalSplitPanel {
                         window.setHeight(50, Unit.PERCENTAGE);
                         window.setContent(vl);
 
-                        for (PopisLokacija pl : odabraniRadnikIzTabele.getPopisLokacijaList()) {
+                        List<PopisLokacija> stavkeRadnika = controller.geInventoryWorker_AllItems(odabraniRadnikIzTabele);
+
+                        for (PopisLokacija pl : stavkeRadnika) {
                             vl.addComponent(new Label(pl.toString()));
                         }
 
@@ -136,8 +150,22 @@ public class MainUI extends HorizontalSplitPanel {
             }
         });
 
+        excelExportButton.addClickListener(new Button.ClickListener() {
+            private ExcelExport excelExport;
+
+            @Override
+            public void buttonClick(Button.ClickEvent event) {
+                excelExport = new ExcelExport(table_RADNIK);
+                excelExport.excludeCollapsedColumns();
+                excelExport.setReportTitle("Izvoz mojih radnika");
+                excelExport.export();
+            }
+        });
+
         mainMenuPanel.addComponent(textField_RADNIK);
         mainMenuPanel.addComponent(button_RADNIK);
         mainMenuPanel.addComponent(table_RADNIK);
+
+        mainMenuPanel.addComponent(excelExportButton);
     }
 }

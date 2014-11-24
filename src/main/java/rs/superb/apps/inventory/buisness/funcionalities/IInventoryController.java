@@ -7,6 +7,7 @@ package rs.superb.apps.inventory.buisness.funcionalities;
 
 import com.vaadin.data.Container;
 import java.util.List;
+import rs.superb.apps.inventory.database.entities.clients.mol.PopisLokacija;
 import rs.superb.apps.inventory.database.entities.clients.mol.Radnik;
 
 /**
@@ -23,6 +24,21 @@ public interface IInventoryController {
     Container getBeanItemController_InventoryWorker();
 
     /**
+     * Get Vaadin BeanItemContainer for the POJO Invetory Worker bean
+     *
+     * @return
+     */
+    Container getBeanItemController_InventoryWorker_ItemsByUser();
+
+    /**
+     * Set Vaadin BeanItemContainer for the POJO
+     *
+     * @param inventoryWorker Set list of Inventories read by the worker, by
+     * supplying worker object
+     */
+    void setBeanItemController_InventoryWorker_AllItems(Radnik inventoryWorker);
+
+    /**
      * Set Vaadin BeanItemContainer for the POJO
      *
      * @param inventoryWorkerFirstName Set list of Inventory workers, by
@@ -36,5 +52,12 @@ public interface IInventoryController {
      * @return
      */
     List<Radnik> geInventoryWorkers(String inventoryWorkerFirstName);
+
+    /**
+     * @param inventoryWorker Get list of all inventory items read by the
+     * worker, by supplying worker object
+     * @return
+     */
+    List<PopisLokacija> geInventoryWorker_AllItems(Radnik inventoryWorker);
 
 }
