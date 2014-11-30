@@ -5,45 +5,77 @@
  */
 package rs.superb.apps.inventory.components.UI.clients.mol;
 
-import com.vaadin.server.Resource;
-import com.vaadin.server.ThemeResource;
+import com.vaadin.server.ClassResource;
 import com.vaadin.ui.Accordion;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Image;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.VerticalLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AccordionMenu extends Accordion {
 
-    private final String[] menuItems = {"Podešavanja", "POPIS", "Izveštaji"};
-    
-    private final String[] sizes = {"16", "32", "64"};
-    private final String[] icons = {"cancel.png", "calendar.png", "document.png",
-        "email.png", "globe.png", "help.png",
-        "note.png", "ok.png", "trash.png", "user.png"};
+    private final String[] mainMenuCaptions = {"Podešavanja", "Popis", "Izveštaji"};
+
+    private static final String[] images = {
+        "Chrysanthemum.jpg",
+        "Desert.jpg",
+        "Hydrangeas.jpg",
+        "Jellyfish.jpg",
+        "Koala.jpg",
+        "Lighthouse.jpg",
+        "Penguins.jpg",
+        "Tulips.jpg"
+    };
+
+    private final List<String> subMenuItems0 = new ArrayList<>(
+            Arrays.asList(new String[]{"Upravljanje Grupnim Popisom", "Upravljanje Popisom na BS", "Unos Radnika", "Uvoz NAV BS"}));
+    private final List<String> subMenuItems1 = new ArrayList<>(
+            Arrays.asList(new String[]{"Popis OS", "Transfer OS"}));
+    private final List<String> subMenuItems2 = new ArrayList<>(
+            Arrays.asList(new String[]{"Izveštaj Popisa na BS", "Izveštaj Upoređenje NAV-BS", "Rezultat Popisa Trabsfera na BS"}));
+
+    private final Map<String, List<String>> mainMenu = new HashMap<>();
+    private final Map<String, ClassResource> mainMenuIcons = new HashMap<>();
+    private final String ACCORDION_STYLE1 = "mojAccordion";
+    private final String BUTTON_STYLE1 = "mojiDugmici_GlavniMeni";
 
     public AccordionMenu() {
+        setStyleName(ACCORDION_STYLE1);
+
+        mainMenu.put(mainMenuCaptions[0], subMenuItems0);
+        mainMenu.put(mainMenuCaptions[1], subMenuItems1);
+        mainMenu.put(mainMenuCaptions[2], subMenuItems2);
+
         setCaption("INVENTORY Application Menu");
         setSizeFull();
-        createTabs(sizes);
+        createTabs(mainMenuCaptions);
     }
 
-    private void createTabs(String[] sizes) {
-        for (String s : sizes) {
-            CssLayout cssLayout = new CssLayout() {
+    private void createTabs(String[] mainMenuItems) {
+        int ind = 0;
+        for (String mainMenuItem : mainMenuItems) {
+            VerticalLayout vl = new VerticalLayout();
+            vl.setMargin(true);
+            vl.setSpacing(true);
+            vl.setCaption(mainMenuItem);
+            addComponent(vl);
 
-                @Override
-                protected String getCss(Component c) {
-                    return "display: inline-block;";
-                }
-            };
+            for (String subMenu : mainMenu.get(mainMenuItem)) {
+                Button commandButton = new Button(subMenu);
+                commandButton.setStyleName(BUTTON_STYLE1);
+                commandButton.setWidth("80%");
+                commandButton.setHeight("80px");
 
-            cssLayout.setCaption("Icons: " + s + ", x: " + s);
-            addComponent(cssLayout);
+                ClassResource iconResource = new ClassResource("./" + images[(ind++) % (images.length)]);
+                // image.setHeight("64px");
+                // image.setWidth("64px");
 
-            for (String icon : icons) {
-                Resource imageResource = new ThemeResource("../runo/icons/" + s + "/" + icon);
-                Image image = new Image(null, imageResource);
-                cssLayout.addComponent(image);
+                mainMenuIcons.put(mainMenuItem, iconResource);
+
+                vl.addComponent(commandButton);
             }
         }
     }

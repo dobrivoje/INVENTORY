@@ -92,4 +92,21 @@ $v-component-group-spacing: 6px;
     .mojiProzori .v-window {
 
     }
+
+    .mojAccordion .v-accordion-item-caption .v-accordion-item {
+        font-size: 20px;
+        color: #ff6666;
+    }
+
+    /*
+    .mojiDugmici_GlavniMeni .v-button-wrap {
+        white-space: normal;
+    }
+    */
+
+    .mojiDugmici_GlavniMeni .v-button-caption {
+        font-size: 16px;
+        font-weight: 300;
+        color: gold;
+    }
 }

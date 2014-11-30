@@ -1,4 +1,4 @@
-package rs.superb.apps.inventory.controller.clients.mol;
+package rs.superb.apps.inventory.buisness.funcionalities.controller;
 
 import rs.superb.apps.inventory.buisness.funcionalities.IInventoryController;
 import com.vaadin.data.Container;
@@ -17,9 +17,9 @@ public class InventoryController implements IInventoryController {
     //<editor-fold defaultstate="collapsed" desc="Bean Items Containers">
     private final BeanItemContainer<Radnik> beanItemContainer_inventoryWorker;
     private final BeanItemContainer<PopisLokacija> beanItemContainer_inventoryWorker_AllItems;
-
     // private final BeanItemContainer<TmpOSNSREDNAVISION> bean_IC_TMP_OS_NAV = new BeanItemContainer<>(TmpOSNSREDNAVISION.class);
     //</editor-fold>
+
     public InventoryController() {
         dBHandler = DBHandler.getDefault();
         beanItemContainer_inventoryWorker = new BeanItemContainer<>(Radnik.class);
