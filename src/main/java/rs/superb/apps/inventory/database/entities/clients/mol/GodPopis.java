@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "GodPopis.findAll", query = "SELECT g FROM GodPopis g"),
     @NamedQuery(name = "GodPopis.findByIdgp", query = "SELECT g FROM GodPopis g WHERE g.idgp = :idgp"),
+    
+    @NamedQuery(name = "GodPopis.findByNav", query = "SELECT g FROM GodPopis g WHERE g.fkIdn = :IDNAV"),
+    
     @NamedQuery(name = "GodPopis.findByDatum", query = "SELECT g FROM GodPopis g WHERE g.datum = :datum"),
     @NamedQuery(name = "GodPopis.findByRedovan", query = "SELECT g FROM GodPopis g WHERE g.redovan = :redovan"),
     @NamedQuery(name = "GodPopis.findByPopiszavrsen", query = "SELECT g FROM GodPopis g WHERE g.popiszavrsen = :popiszavrsen")})

@@ -6,6 +6,9 @@ import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
+import com.vaadin.navigator.Navigator;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.FormLayout;
@@ -21,13 +24,13 @@ import com.vaadin.ui.themes.Reindeer;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import rs.superb.apps.inventory.buisness.funcionalities.IInventoryController;
+import rs.superb.apps.inventory.buisness.funcionalities.IInventoryWorker;
 import rs.superb.apps.inventory.components.UI.clients.mol.AccordionMenu;
-import rs.superb.apps.inventory.buisness.funcionalities.controller.InventoryController;
+import rs.superb.apps.inventory.buisness.funcionalities.controller.InventoryWorkerController;
 import rs.superb.apps.inventory.database.entities.clients.mol.PopisLokacija;
 import rs.superb.apps.inventory.database.entities.clients.mol.Radnik;
 
-public class MainUI extends HorizontalSplitPanel {
+public class MainUI extends HorizontalSplitPanel implements View {
 
     //<editor-fold defaultstate="collapsed" desc="final defs">
     private static final int MAIN_UI_SPLIT_RATIO_RATIO = 26;
@@ -35,6 +38,8 @@ public class MainUI extends HorizontalSplitPanel {
     private static final float WINDOW_WIDTH_PERCENT = 70;
     private static final float WINDOW_HEIGHT_PERCENT = 66;
     private static final String TABLE_STYLE = "mojaTabelaRadnici";
+
+    public static final String VIEW_ID = "MainUI_View";
 
     private int selectAllWorkers = 0;
     //</editor-fold>
@@ -52,10 +57,12 @@ public class MainUI extends HorizontalSplitPanel {
     private final Button orderingButton;
     private final Button selectAllButton;
 
-    private final IInventoryController controller;
+    private final IInventoryWorker controller;
 
     private final Set<Radnik> narucivanjeRadnika = new HashSet<>();
     private final Set<CheckBox> narucivanjeRadnikaCheckBox = new HashSet<>();
+
+    private Navigator navigator;
 
     public MainUI() {
         setSplitPosition(MAIN_UI_SPLIT_RATIO_RATIO, Unit.PERCENTAGE);
@@ -75,7 +82,7 @@ public class MainUI extends HorizontalSplitPanel {
         mainMenuPanelFooter.setSpacing(true);
         mainMenuPanel.addComponent(mainMenuPanelFooter);
 
-        this.controller = new InventoryController();
+        this.controller = new InventoryWorkerController();
 
         // JAKO BITNA LINIJA !
         // ako se ne definiše, onda dugme Sellect All NEĆE selektovati sve checkBox 
@@ -243,5 +250,9 @@ public class MainUI extends HorizontalSplitPanel {
         }
 
         UI.getCurrent().addWindow(window);
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent event) {
     }
 }

@@ -14,7 +14,7 @@ import rs.superb.apps.inventory.database.entities.clients.mol.Radnik;
  *
  * @author root
  */
-public interface IInventoryController {
+public interface IInventoryWorker {
 
     /**
      * Get Vaadin BeanItemContainer for the POJO Invetory Worker bean

@@ -10,7 +10,9 @@ import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import rs.superb.apps.inventory.database.entities.clients.mol.GodPopis;
 import rs.superb.apps.inventory.database.entities.clients.mol.Lokacija;
+import rs.superb.apps.inventory.database.entities.clients.mol.NavGen;
 import rs.superb.apps.inventory.database.entities.clients.mol.Radnik;
 import rs.superb.apps.inventory.database.entities.clients.mol.TmpOSNSREDNAVISION;
 
@@ -61,6 +63,29 @@ public class DBHandler {
         try {
             return getEm().createNamedQuery("Radnik.poPrezimenu")
                     .setParameter("Prezime", DelimicnoPrezime.concat("%"))
+                    .getResultList();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="God. Popis">
+    public List<GodPopis> getAnnualList(NavGen navGen) {
+        try {
+            return getEm().createNamedQuery("GodPopis.findByNav")
+                    .setParameter("IDNAV", navGen)
+                    .getResultList();
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="NAV_GEN">
+    public List<NavGen> getAllNAV_Items() {
+        try {
+            return getEm().createNamedQuery("NavGen.findAll")
                     .getResultList();
         } catch (Exception ex) {
             return null;

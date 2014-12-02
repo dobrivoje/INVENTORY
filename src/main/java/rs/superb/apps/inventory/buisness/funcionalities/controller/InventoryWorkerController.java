@@ -1,6 +1,6 @@
 package rs.superb.apps.inventory.buisness.funcionalities.controller;
 
-import rs.superb.apps.inventory.buisness.funcionalities.IInventoryController;
+import rs.superb.apps.inventory.buisness.funcionalities.IInventoryWorker;
 import com.vaadin.data.Container;
 import com.vaadin.data.util.BeanItemContainer;
 import java.util.List;
@@ -8,7 +8,7 @@ import rs.superb.apps.inventory.database.entities.clients.mol.Radnik;
 import rs.superb.apps.inventory.database.dbhandler.clients.mol.DBHandler;
 import rs.superb.apps.inventory.database.entities.clients.mol.PopisLokacija;
 
-public class InventoryController implements IInventoryController {
+public class InventoryWorkerController implements IInventoryWorker {
 
     //<editor-fold defaultstate="collapsed" desc="Database Handler">
     private final DBHandler dBHandler;
@@ -20,7 +20,7 @@ public class InventoryController implements IInventoryController {
     // private final BeanItemContainer<TmpOSNSREDNAVISION> bean_IC_TMP_OS_NAV = new BeanItemContainer<>(TmpOSNSREDNAVISION.class);
     //</editor-fold>
 
-    public InventoryController() {
+    public InventoryWorkerController() {
         dBHandler = DBHandler.getDefault();
         beanItemContainer_inventoryWorker = new BeanItemContainer<>(Radnik.class);
         beanItemContainer_inventoryWorker_AllItems = new BeanItemContainer<>(PopisLokacija.class);

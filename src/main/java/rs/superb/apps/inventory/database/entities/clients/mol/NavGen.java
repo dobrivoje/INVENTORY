@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "NavGen.findByDatumGenerisanja", query = "SELECT n FROM NavGen n WHERE n.datumGenerisanja = :datumGenerisanja"),
     @NamedQuery(name = "NavGen.findByNapomena", query = "SELECT n FROM NavGen n WHERE n.napomena = :napomena")})
 public class NavGen implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -110,15 +111,12 @@ public class NavGen implements Serializable {
             return false;
         }
         NavGen other = (NavGen) object;
-        if ((this.idn == null && other.idn != null) || (this.idn != null && !this.idn.equals(other.idn))) {
-            return false;
-        }
-        return true;
+        return !((this.idn == null && other.idn != null) || (this.idn != null && !this.idn.equals(other.idn)));
     }
 
     @Override
     public String toString() {
-        return "org.superb.clients.mol.inventory.inventory.DB.NavGen[ idn=" + idn + " ]";
+        return "[" + datumGenerisanja + "]";
     }
-    
+
 }
